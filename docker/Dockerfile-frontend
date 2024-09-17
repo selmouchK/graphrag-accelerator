@@ -7,11 +7,15 @@ ENV PIP_ROOT_USER_ACTION=ignore
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1
 ENV SETUPTOOLS_USE_DISTUTILS=stdlib
 
-COPY poetry.lock pyproject.toml /
+# use different poetry config for front without any dependency conflicting with altar 4 and last streamlit version
+# (fixes altair.v4 issues and st.text.help error since property has been added in version 1.21.0)
+# see https://docs.streamlit.io/develop/quick-reference/release-notes
+COPY poetry-front.lock /poetry.lock
+COPY pyproject-front.toml /pyproject.toml
 COPY frontend /frontend
 RUN pip install poetry \
     && poetry config virtualenvs.create false \
-    && poetry install --without backend
+    && poetry install
 
 WORKDIR /frontend
 EXPOSE 8080

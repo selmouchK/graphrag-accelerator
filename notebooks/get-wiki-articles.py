@@ -2,6 +2,7 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT License.
 
+# !pip install wikipedia
 """
 This script downloads a few sample wikipedia articles that can be used for demo or quickstart purposes in conjunction with the solution accelerator.
 """
